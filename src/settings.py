@@ -6,7 +6,6 @@ from odmantic import AIOEngine
 from pydantic import Field
 from pydantic.types import SecretStr
 from pydantic_settings import BaseSettings
-from motor.motor_asyncio import AsyncIOMotorClient
 
 
 class _Settings(BaseSettings):

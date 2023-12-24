@@ -19,6 +19,7 @@ class Visitor(BaseSchema):
     address: str
     sign_in_time: datetime = Field(default=..., alias="signInTime")
 
+
 class NewVisitorResponse(BaseSchema):
     user: Visitor
     token: str

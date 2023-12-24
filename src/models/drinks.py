@@ -1,5 +1,4 @@
-from datetime import datetime
-from odmantic import Field, Model, Reference
+from odmantic import Model, Reference
 
 from models.staff_member import StaffMemberModel
 

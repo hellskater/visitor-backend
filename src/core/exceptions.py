@@ -9,6 +9,7 @@ class NotAuthenticatedException(HTTPException):
             headers={"WWW-Authenticate": "Token"},
         )
 
+
 class CredentialsException(HTTPException):
     def __init__(self) -> None:
         super().__init__(
