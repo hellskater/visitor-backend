@@ -106,4 +106,4 @@ venv.bak/
 Pipfile.lock
 
 # env files
-.env
+*.env

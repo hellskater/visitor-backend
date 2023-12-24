@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
 
 from models.staff_member import StaffMemberModel
 from models.visitor import VisitorModel
@@ -10,6 +10,7 @@ from schemas.visitor import Visitor
 from services.visiting_details import create_new_visiting_details
 from settings import Engine
 from utils.security import get_user_instance
+from utils.sms import send_sms
 
 router = APIRouter()
 
@@ -22,6 +23,7 @@ router = APIRouter()
 async def add_new_visiting_details(
     visiting_details: NewVisitingDetails,
     user: Annotated[Visitor, Depends(dependency=get_user_instance)],
+    background_tasks: BackgroundTasks,
 ) -> VisitingDetails:
     staff_member = await Engine.find_one(
         StaffMemberModel, StaffMemberModel.id == visiting_details.staff_member_id
@@ -50,4 +52,13 @@ async def add_new_visiting_details(
     new_visiting_details = await create_new_visiting_details(
         engine=Engine, visiting_details=visiting_details_instance
     )
+
+    if visiting_details.send_notification:
+        background_tasks.add_task(
+            send_sms,
+            phone_number=staff_member.mobile,
+            message=f"Hello {staff_member.name}, you have"
+            f" an appointment with {visitor.name} for {visiting_details.reason}",
+        )
+
     return new_visiting_details

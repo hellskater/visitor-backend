@@ -1,5 +1,5 @@
 from typing import Annotated
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
 
 from models.drinks import DrinkModel
 from models.visitor import VisitorModel
@@ -9,6 +9,8 @@ from schemas.visitior_drinks import NewVisitorDrinks, VisitorDrinks
 from schemas.visitor import Visitor
 from services.visitor_drinks import create_new_visitor_drink
 from settings import Engine
+from src.models.staff_member import StaffMemberModel
+from src.utils.sms import send_sms
 from utils.security import get_user_instance
 
 router = APIRouter()
@@ -32,6 +34,7 @@ async def get_drinks() -> list[Drink]:
 async def add_new_visitor_drink(
     visitor_drink: NewVisitorDrinks,
     user: Annotated[Visitor, Depends(dependency=get_user_instance)],
+    background_tasks: BackgroundTasks,
 ) -> VisitorDrinks:
     drink = await Engine.find_one(DrinkModel, DrinkModel.id == visitor_drink.drink_id)
     visitor = await Engine.find_one(VisitorModel, VisitorModel.id == user.id)
@@ -48,6 +51,10 @@ async def add_new_visitor_drink(
             detail="Visitor not found",
         )
 
+    staff_member = await Engine.find_one(
+        StaffMemberModel, StaffMemberModel.id == drink.staff_member_id
+    )
+
     visitor_drink_dict = visitor_drink.model_dump()
     visitor_drink_dict["drink_id"] = drink
 
@@ -58,4 +65,13 @@ async def add_new_visitor_drink(
     new_visitor_drink = await create_new_visitor_drink(
         engine=Engine, visitor_drink=visitor_drink_instance
     )
+
+    if staff_member:
+        background_tasks.add_task(
+            send_sms,
+            phone_number=staff_member.mobile,
+            message=f"Hello {staff_member.name}, you have"
+            f" a new drink request from {visitor.name}",
+        )
+
     return new_visitor_drink
