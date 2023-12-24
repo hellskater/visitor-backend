@@ -1,11 +1,9 @@
 from fastapi import APIRouter, Depends
+
 from models.staff_member import StaffMemberModel
 from schemas.staff_member import StaffMember
 from settings import Engine
-
-
 from utils.security import get_user_instance
-
 
 router = APIRouter()
 

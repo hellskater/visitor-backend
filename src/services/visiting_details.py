@@ -1,6 +1,5 @@
 from odmantic import AIOEngine
 
-
 from models.visitor_details import VisitingDetailsModel
 from schemas.visiting_details import VisitingDetails
 

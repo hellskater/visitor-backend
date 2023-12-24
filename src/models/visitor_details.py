@@ -1,8 +1,9 @@
 from datetime import datetime
+
 from odmantic import Field, Model, Reference
 
-from models.visitor import VisitorModel
 from models.staff_member import StaffMemberModel
+from models.visitor import VisitorModel
 
 
 class VisitingDetailsModel(Model):

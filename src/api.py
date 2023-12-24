@@ -1,13 +1,14 @@
 from datetime import datetime
+
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers.visitor import router as visitor_router
+from routers.drinks import router as drinks_router
 from routers.profile import router as profile_router
 from routers.staff_member import router as staff_member_router
 from routers.visiting_details import router as visiting_details_router
-from routers.drinks import router as drinks_router
+from routers.visitor import router as visitor_router
 
 app = FastAPI()
 

@@ -1,8 +1,8 @@
 from datetime import datetime
+
 from odmantic import Field, Model, Reference
 
 from models.drinks import DrinkModel
-
 from models.visitor import VisitorModel
 
 

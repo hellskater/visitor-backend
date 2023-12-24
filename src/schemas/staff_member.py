@@ -1,5 +1,6 @@
-from schemas.base import BaseSchema
 from odmantic.bson import ObjectId
+
+from schemas.base import BaseSchema
 
 
 class StaffMember(BaseSchema):

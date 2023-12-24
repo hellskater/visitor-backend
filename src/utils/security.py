@@ -1,11 +1,12 @@
 from datetime import datetime, timedelta
 from typing import Annotated
+
 from fastapi import Header
+from jose import JWTError, jwt
 from odmantic import ObjectId
 from pydantic import BaseModel, ValidationError
-from jose import jwt, JWTError
-from core.exceptions import CredentialsException, NotAuthenticatedException
 
+from core.exceptions import CredentialsException, NotAuthenticatedException
 from schemas.visitor import Visitor
 from services.visitor import fetch_visitor_by_id
 from settings import SETTINGS, Engine

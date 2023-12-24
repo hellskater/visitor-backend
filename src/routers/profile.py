@@ -1,9 +1,9 @@
 from typing import Annotated
+
 from fastapi import APIRouter, Depends
 
 from schemas.visitor import Visitor
 from utils.security import get_user_instance
-
 
 router = APIRouter()
 

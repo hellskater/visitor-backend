@@ -1,11 +1,10 @@
 from fastapi import APIRouter, status
-from models.visitor import VisitorModel
 
+from models.visitor import VisitorModel
 from schemas.visitor import NewVisitor, NewVisitorResponse
 from services.visitor import create_new_visitor
 from settings import Engine
 from utils.security import create_access_token
-
 
 router = APIRouter()
 

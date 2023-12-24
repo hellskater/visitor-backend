@@ -1,18 +1,15 @@
 from typing import Annotated
+
 from fastapi import APIRouter, Depends, HTTPException, status
+
 from models.staff_member import StaffMemberModel
 from models.visitor import VisitorModel
 from models.visitor_details import VisitingDetailsModel
-from schemas.visiting_details import (
-    NewVisitingDetails,
-    VisitingDetails,
-)
+from schemas.visiting_details import NewVisitingDetails, VisitingDetails
 from schemas.visitor import Visitor
-
 from services.visiting_details import create_new_visiting_details
 from settings import Engine
 from utils.security import get_user_instance
-
 
 router = APIRouter()
 

@@ -1,6 +1,6 @@
 from datetime import datetime
-from odmantic.bson import ObjectId
 
+from odmantic.bson import ObjectId
 from pydantic import Field
 
 from schemas.base import BaseSchema

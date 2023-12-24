@@ -1,11 +1,9 @@
 from fastapi import APIRouter, Depends
+
 from models.drinks import DrinkModel
 from schemas.drinks import Drink
 from settings import Engine
-
-
 from utils.security import get_user_instance
-
 
 router = APIRouter()
 
