@@ -5,7 +5,7 @@ from models.visitor import VisitorModel
 from models.staff_member import StaffMemberModel
 
 
-class VisitorDetailsModel(Model):
+class VisitingDetailsModel(Model):
     staff_member_id: StaffMemberModel = Reference()
     visitor_id: VisitorModel = Reference()
     reason: str
