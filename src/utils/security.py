@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from typing import Annotated, Optional
+from typing import Annotated
 from fastapi import Header
 from odmantic import ObjectId
 from pydantic import BaseModel, ValidationError
@@ -27,7 +27,9 @@ def create_access_token(user: Visitor) -> str:
     return str(object=encoded_jwt)
 
 
-def is_valid_token(token: Annotated[str | None, Header(alias="x-auth-token")] = None) -> bool:
+async def get_user_instance(
+    token: Annotated[str | None, Header(alias="x-auth-token")] = None
+) -> Visitor:
     if token is None:
         raise NotAuthenticatedException()
     try:
@@ -52,9 +54,6 @@ def is_valid_token(token: Annotated[str | None, Header(alias="x-auth-token")] = 
     except ValidationError:
         raise CredentialsException()
 
-    user = fetch_visitor_by_id(Engine, visitor_id=ObjectId(token_content.user_id))
+    user = await fetch_visitor_by_id(Engine, visitor_id=ObjectId(token_content.user_id))
 
-    if user is None:
-        raise CredentialsException()
-
-    return True
+    return user

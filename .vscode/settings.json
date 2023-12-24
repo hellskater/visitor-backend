@@ -9,6 +9,7 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
+  "python.a.pylintEnabled": false,
   "python.testing.pytestEnabled": true,
   "editor.formatOnSave": true,
   "files.exclude": {
