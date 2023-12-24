@@ -1,4 +1,5 @@
 from datetime import datetime
+from odmantic.bson import ObjectId
 
 from pydantic import Field
 
@@ -12,7 +13,12 @@ class NewVisitor(BaseSchema):
 
 
 class Visitor(BaseSchema):
+    id: ObjectId
     name: str
     mobile: str
     address: str
-    sign_in_time: datetime = Field(..., alias="signInTime")
+    sign_in_time: datetime = Field(default=..., alias="signInTime")
+
+class NewVisitorResponse(BaseSchema):
+    user: Visitor
+    token: str

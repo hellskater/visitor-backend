@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,11 +20,11 @@ app.add_middleware(
 
 @app.get(path="/health", tags=["health"], response_model=dict[str, str])
 async def health_check() -> dict[str, str]:
-    current_time = datetime.datetime.now().strftime(format="%Y-%m-%d %H:%M:%S")
+    current_time = datetime.now().strftime(format="%Y-%m-%d %H:%M:%S")
     return {"status": "ok", "current_time": current_time}
 
 
-app.include_router(router=visitor_router, tags=["visitor"])
+app.include_router(router=visitor_router, tags=["visitor"], prefix="/api/v1")
 
 
 if __name__ == "__main__":
