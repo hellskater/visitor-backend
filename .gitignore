@@ -104,3 +104,6 @@ venv.bak/
 
 #Pipenv lock file to allow slightly different python versions
 Pipfile.lock
+
+# env files
+.env
