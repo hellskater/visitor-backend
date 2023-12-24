@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from routers.visitor import router as visitor_router
 from routers.profile import router as profile_router
+from routers.staff_member import router as staff_member_router
 
 
 app = FastAPI()
@@ -27,6 +28,7 @@ async def health_check() -> dict[str, str]:
 
 app.include_router(router=visitor_router, tags=["visitor"], prefix="/api/v1")
 app.include_router(router=profile_router, tags=["profile"], prefix="/api/v1")
+app.include_router(router=staff_member_router, tags=["staff_member"], prefix="/api/v1")
 
 if __name__ == "__main__":
     uvicorn.run(app=app)
