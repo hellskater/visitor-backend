@@ -14,8 +14,8 @@ async def seed_data() -> None:
         },
         {
             "name": "Priyosmita Nandy",
-            "image": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fd/"
-            "Wonder_Woman_DC_Comics.png/220px-Wonder_Woman_DC_Comics.png",
+            "image": "https://is1-ssl.mzstatic.com/image/thumb/"
+            "ZypiNEdbU0wwCF0GMJ3zoA/1200x675mf.jpg",
             "email": "priyosh08@gmail.com",
             "mobile": "8697892238",
         },
@@ -34,8 +34,8 @@ async def seed_data() -> None:
         },
         {
             "name": "Water",
-            "image": "https://www.sciencenewsforstudents.org/wp-content"
-            "/uploads/2020/03/1030_LL_water-1028x579.jpg",
+            "image": "https://img.freepik.com/free-vector/"
+            "isolated-glass-water_1368-2666.jpg",
         },
     ]
 

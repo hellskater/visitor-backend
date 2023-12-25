@@ -9,8 +9,8 @@ from schemas.visitior_drinks import NewVisitorDrinks, VisitorDrinks
 from schemas.visitor import Visitor
 from services.visitor_drinks import create_new_visitor_drink
 from settings import Engine
-from src.models.staff_member import StaffMemberModel
-from src.utils.sms import send_sms
+from models.staff_member import StaffMemberModel
+from utils.sms import send_sms
 from utils.security import get_user_instance
 
 router = APIRouter()
@@ -51,8 +51,10 @@ async def add_new_visitor_drink(
             detail="Visitor not found",
         )
 
+    staff_member_id = str(drink.staff_member_id)
+
     staff_member = await Engine.find_one(
-        StaffMemberModel, StaffMemberModel.id == drink.staff_member_id
+        StaffMemberModel, StaffMemberModel.id == staff_member_id
     )
 
     visitor_drink_dict = visitor_drink.model_dump()
